@@ -50,11 +50,9 @@ const booleanExpression = (input) => {
     // Stack now contains the correct order
     // We can apply simplification rules starting at lowest level and than working our way up
 
-    let count = 1
     while (stack.length > 0) {
         root = stack.pop()
 
-        console.log(count)
         console.log(`Original Root: ${root}`)
 
         // Attempt to apply simplification rules
@@ -85,7 +83,6 @@ const booleanExpression = (input) => {
         }
 
         console.log(`Simplified Root: ${root}`)
-        count += 1;
     }
 
     return root.toString().replace(/-/g, ".")
@@ -160,18 +157,56 @@ const booleanExpression = (input) => {
              const leftChild = root.args[0]
              const rightChild = root.args[1]
 
-             if ((leftChild.isSymbolNode && rightChild.isOperatorNode && rightChild.op === '~' && rightChild.args[0].name === leftChild.name) ||
-                 (rightChild.isSymbolNode && leftChild.isOperatorNode && leftChild.op === '~' && leftChild.args[0].name === rightChild.name)) {
-                 return new math.expression.node.ConstantNode(0)
+             if (rightChild.isOperatorNode && rightChild.op === '~' ) {
+                 // Clear parent reference when doing comparison
+                 leftChild.parent = null
+                 leftChild.position = 0
+
+                 rightChild.args[0].parent = null
+                 rightChild.args[0].position = 0
+
+                 if (leftChild.equals(rightChild.args[0])) {
+                     return new math.expression.node.ConstantNode(0)
+                 }
+             } else if (leftChild.isOperatorNode && leftChild.op === '~' ) {
+                 // Clear parent reference when doing comparison
+                 rightChild.parent = null
+                 rightChild.position = 0
+
+                 leftChild.args[0].parent = null
+                 leftChild.args[0].position = 0
+
+                 if (rightChild.equals(leftChild.args[0])) {
+                     return new math.expression.node.ConstantNode(0)
+                 }
              }
          } else if (root.isOperatorNode && root.op === '+') {
 
              const leftChild = root.args[0]
              const rightChild = root.args[1]
 
-             if ((leftChild.isSymbolNode && rightChild.isOperatorNode && rightChild.op === '~' && rightChild.args[0].name === leftChild.name) ||
-                 (rightChild.isSymbolNode && leftChild.isOperatorNode && leftChild.op === '~' && leftChild.args[0].name === rightChild.name)) {
-                 return new math.expression.node.ConstantNode(1)
+             if (rightChild.isOperatorNode && rightChild.op === '~' ) {
+                 // Clear parent reference when doing comparison
+                 leftChild.parent = null
+                 leftChild.position = 0
+
+                 rightChild.args[0].parent = null
+                 rightChild.args[0].position = 0
+
+                 if (leftChild.equals(rightChild.args[0])) {
+                     return new math.expression.node.ConstantNode(1)
+                 }
+             } else if (leftChild.isOperatorNode && leftChild.op === '~' ) {
+                 // Clear parent reference when doing comparison
+                 rightChild.parent = null
+                 rightChild.position = 0
+
+                 leftChild.args[0].parent = null
+                 leftChild.args[0].position = 0
+
+                 if (rightChild.equals(leftChild.args[0])) {
+                     return new math.expression.node.ConstantNode(1)
+                 }
              }
          }
          // End of Complement Law

@@ -56,3 +56,7 @@ div.logo a {
 .app-list {
     margin-top: 16px;
 }
+
+.ant-form-item-control-wrapper {
+    width: 100%;
+}

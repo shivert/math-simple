@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Input, Button, Row, Col, Card } from 'antd';
+import { Input, Button, Row, Col, Card, Form } from 'antd';
 import { simplifyExpression } from './../../../actions/simplifyActions'
 
 class BooleanExpression extends Component {
@@ -17,10 +17,13 @@ class BooleanExpression extends Component {
         })
     }
 
+    validInput = () => {
+        return /^[a-zA-Z 0-1.+()]*$/g.test(this.state.input)
+    }
 
     render() {
-        return (
 
+        return (
             <div style={{ padding: 30, background: '#fff' }}>
                 <h1>Boolean Expression Simplifier</h1>
 
@@ -46,26 +49,32 @@ class BooleanExpression extends Component {
 
                 <div>
                     <h3>Enter your boolean expression below:</h3>
-                    <Input
-                        value={this.state.input}
-                        size="large"
-                        placeholder="Enter Expression"
-                        onChange={(e) => {
-                            this.setState({ input: e.target.value })
-                        }}
-                        onPressEnter={() => {
-                            if (this.state.input.length > 0) {
-                                this.setState({
-                                    original: this.state.input,
-                                    simplified: simplifyExpression(this.state.input)
-                                })
-                            }
-                        }}
-                    />
+                    <Form>
+                        <FormItem
+                            validateStatus={this.validInput() ? '' : 'error'}
+                        >
+                            <Input
+                                value={this.state.input}
+                                size="large"
+                                placeholder="Enter Expression"
+                                onChange={(e) => {
+                                    this.setState({ input: e.target.value })
+                                }}
+                                onPressEnter={() => {
+                                    if (this.state.input.length > 0 && this.validInput()) {
+                                        this.setState({
+                                            original: this.state.input,
+                                            simplified: simplifyExpression(this.state.input)
+                                        })
+                                    }
+                                }}
+                            />
+                        </FormItem>
+                    </Form>
                     <Button
                         type="primary"
-                        style={{ width: '100%', marginTop: 20 }}
-                        disabled={this.state.input === ''}
+                        style={{ width: '100%', height: 40 }}
+                        disabled={this.state.input === '' || !this.validInput()}
                         onClick={() => {
                             this.setState({
                                 original: this.state.input,
