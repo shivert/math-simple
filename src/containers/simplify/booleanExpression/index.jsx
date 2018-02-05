@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Input, Button, Row, Col, Card, Form } from 'antd';
 import { simplifyExpression } from './../../../actions/simplifyActions'
 
+const FormItem = Form.Item
+
 class BooleanExpression extends Component {
     state = {
         input: '',
