@@ -1,0 +1,58 @@
+@import '~antd/dist/antd.css';
+
+.App {
+  text-align: center;
+}
+
+div.logo {
+    height: 32px;
+    margin: 32px;
+}
+
+div.logo > p {
+    font-size: 24px;
+    color: white;
+    text-align: center;
+    font-family: 'Exo', Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+div.logo a {
+    text-decoration: none;
+    color: white;
+}
+
+.ant-layout-sider-collapsed div.logo > p {
+    display: none;
+}
+
+.home-page h1 {
+    font-size: 6em;
+    margin-top: 1em;
+}
+
+.home-page h1 span {
+    font-family: 'Exo', Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.home-page h4 {
+    font-size: 1.5em;
+    font-weight: 400;
+}
+
+
+.demo {
+    margin: 16px;
+}
+.demo-nav {
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 16px;
+    background: #f8f8f8;
+}
+.demo-nav a {
+    line-height: 30px;
+    padding: 0 8px;
+}
+.app-list {
+    margin-top: 16px;
+}
