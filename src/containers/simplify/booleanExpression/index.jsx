@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Input, Button, Row, Col, Card, Form } from 'antd';
-import { simplifyExpression } from './../../../actions/simplifyActions'
+import { simplifyExpression } from '../../../actions/booleanExpressionSimplifier'
 
 const FormItem = Form.Item
 
@@ -19,8 +19,8 @@ class BooleanExpression extends Component {
         })
     }
 
-    validInput = () => {
-        return /^[a-zA-Z 0-1.+()]*$/g.test(this.state.input)
+    validateInput = () => {
+        return /^[a-zA-Z 0-1.+~()]$/g.test(this.state.input)
     }
 
     render() {
@@ -47,13 +47,26 @@ class BooleanExpression extends Component {
                             <Card title="Complement Law" bordered={true}>A . ~A = 0 <br/> A + ~A = 1</Card>
                         </Col>
                     </Row>
+                    <Row gutter={20} type="flex" justify="center" style={{ marginTop: 20 }}>
+                        <Col span={12}>
+                            <Card title="Other Law #1" bordered={true}>A . (B + C) = A . B + A . C<br/>A + B . C = (A + B).(A + C)</Card>
+                        </Col>
+                        <Col span={12}>
+                            <Card title="Other Law #2" bordered={true}>A + A . B = A<br/>A . (A + B) = A</Card>
+                        </Col>
+                    </Row>
+                    <Row gutter={20} type="flex" justify="center" style={{ marginTop: 20 }}>
+                        <Col span={12}>
+                            <Card title="Other Law #3" bordered={true}> A . B + A . ~B = A<br/>(A + B) . (A + ~B) = A</Card>
+                        </Col>
+                    </Row>
                 </div>
 
                 <div>
                     <h3>Enter your boolean expression below:</h3>
                     <Form>
                         <FormItem
-                            validateStatus={this.validInput() ? '' : 'error'}
+                            validateStatus={this.validateInput() ? '' : 'error'}
                         >
                             <Input
                                 value={this.state.input}
@@ -63,7 +76,7 @@ class BooleanExpression extends Component {
                                     this.setState({ input: e.target.value })
                                 }}
                                 onPressEnter={() => {
-                                    if (this.state.input.length > 0 && this.validInput()) {
+                                    if (this.state.input.length > 0 && this.validateInput()) {
                                         this.setState({
                                             original: this.state.input,
                                             simplified: simplifyExpression(this.state.input)
@@ -76,7 +89,7 @@ class BooleanExpression extends Component {
                     <Button
                         type="primary"
                         style={{ width: '100%', height: 40 }}
-                        disabled={this.state.input === '' || !this.validInput()}
+                        disabled={this.state.input === '' || !this.validateInput()}
                         onClick={() => {
                             this.setState({
                                 original: this.state.input,
