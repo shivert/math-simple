@@ -20,7 +20,7 @@ class BooleanExpression extends Component {
     }
 
     validateInput = () => {
-        return /^[a-zA-Z 0-1.+~()]$/g.test(this.state.input)
+        return /^[a-zA-Z 0-1.+~()]*$/g.test(this.state.input)
     }
 
     render() {
