@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
-import { Input, Button, Row, Col, Card, Form } from 'antd';
-import { simplifyExpression } from '../../../actions/booleanExpressionSimplifier'
+import { Input, Button, Row, Col, Card, Form } from 'antd'
+import * as BooleanActions  from '../../../actions/booleanActions'
+
+import { simplifyExpression } from '../../../utils/booleanExpressionSimplifier'
+import {connect} from "react-redux"
+import PropTypes from "prop-types"
+import { bindActionCreators } from "redux"
 
 const FormItem = Form.Item
 
@@ -9,7 +14,11 @@ class BooleanExpression extends Component {
         input: '',
         original: '',
         simplified: ''
-    };
+    }
+
+    componentWillMount() {
+        this.props.getBooleanLaws()
+    }
 
     componentWillUnmount() {
         this.setState({
@@ -27,7 +36,7 @@ class BooleanExpression extends Component {
 
         return (
             <div style={{ padding: 30, background: '#fff' }}>
-                <h1>Boolean Expression Simplifier</h1>
+                <h1>#{this.props.booleanLaws}</h1>
 
                 <h3>The following Laws of Boolean Algebra have been implemented:</h3>
                 <div style={{ textAlign: 'center', padding: '10px 25px 25px 25px' }}>
@@ -49,15 +58,15 @@ class BooleanExpression extends Component {
                     </Row>
                     <Row gutter={20} type="flex" justify="center" style={{ marginTop: 20 }}>
                         <Col span={12}>
-                            <Card title="Other Law #1" bordered={true}>A . (B + C) = A . B + A . C<br/>A + B . C = (A + B).(A + C)</Card>
+                            <Card title="Distributive Law" bordered={true}>A . (B + C) = A . B + A . C<br/>A + (B . C) = (A + B).(A + C)</Card>
                         </Col>
                         <Col span={12}>
-                            <Card title="Other Law #2" bordered={true}>A + A . B = A<br/>A . (A + B) = A</Card>
+                            <Card title="Absorptive Law" bordered={true}>A + A . B = A<br/>A . (A + B) = A</Card>
                         </Col>
                     </Row>
                     <Row gutter={20} type="flex" justify="center" style={{ marginTop: 20 }}>
                         <Col span={12}>
-                            <Card title="Other Law #3" bordered={true}> A . B + A . ~B = A<br/>(A + B) . (A + ~B) = A</Card>
+                            <Card title="Redundancy Law" bordered={true}> A . B + A . ~B = A<br/>(A + B) . (A + ~B) = A</Card>
                         </Col>
                     </Row>
                 </div>
@@ -116,4 +125,20 @@ class BooleanExpression extends Component {
     }
 }
 
-export default BooleanExpression;
+BooleanExpression.propTypes = {
+    booleanLaws: PropTypes.arrayOf(Object).isRequired
+}
+
+function mapStateToProps(state) {
+    return {
+        booleanLaws: state.booleanLaws
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(BooleanActions, dispatch)
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(BooleanExpression)
+

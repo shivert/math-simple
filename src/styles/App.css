@@ -1,4 +1,11 @@
-@import '~antd/dist/antd.css';
+@import '../../node_modules/antd/dist/antd.css';
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
 
 .App {
   text-align: center;
