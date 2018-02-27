@@ -1,5 +1,5 @@
-const API_BASE = 'http://localhost:4000'
 const request = require('superagent')
+const API_BASE = 'http://localhost:4000'
 
 export const getBooleanLaws = () => {
     return request.get(`${API_BASE}/api/simplify/boolean/laws`)
