@@ -1,4 +1,4 @@
-import { UPDATE_BOOLEAN_LAWS_LIST } from './../constants/actionTypes';
+import { UPDATE_BOOLEAN_LAWS_LIST } from './../constants/actionTypes'
 
 export default function booleanLaws(state = [], action) {
     switch (action.type) {

@@ -5,18 +5,10 @@ export const getBooleanLaws = () => {
     return request.get(`${API_BASE}/api/simplify/boolean/laws`)
 }
 
-export const getPreComputedBooleanExpressions = () => {
-    return request.get('/api/simplify/boolean/expressions')
+export const getExpressionData = (original) => {
+    return request.get(`${API_BASE}/api/simplify/boolean/expressions`).query({ original })
 }
 
-export const postBooleanExpressionAlreadyComputed = () => {
-    return request.get('/api/simplify/boolean/expressions')
-}
-
-export const postSimplifyBooleanExpression = () => {
-    return request.get('/api/simplify/boolean/expressions')
-}
-
-export const postBooleanExpressionSimplistForm = () => {
-    return request.get('/api/simplify/boolean/expressions')
+export const simplifyBooleanExpression = (expression) => {
+    return request.post(`${API_BASE}/api/simplify/boolean/expressions`).send({ expression })
 }
