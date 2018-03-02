@@ -49,7 +49,7 @@ class BooleanExpression extends Component {
                     <Row gutter={20} type="flex" justify="center">
                     {
                         this.state.booleanLaws.map(law => (
-                            <Col key={law.name} span={12}>
+                            <Col key={law.name} span={8}>
                                 <Card style={{marginTop: 20}} title={law.name} bordered={true}>{law.rules[0]}<br/>{law.rules[1]}</Card>
                             </Col>
                         ))
