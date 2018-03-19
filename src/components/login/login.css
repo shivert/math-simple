@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans');
+
+.center{
+    font-family: 'IBM Plex Sans', sans-serif;
+    background-color: #003459;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card{
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 1.2rem;
+    margin-bottom: 10%;
+}
+
+.card > form{
+    display: flex;
+    flex-direction: column;
+}
+
+.card h1{
+    text-align: center;
+    margin-top: 0;
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+}
+
+.form-item{
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 1rem;
+    padding: 10px;
+    margin-bottom: 1.5rem;
+    height: 40px;
+    width: 24rem;
+    border: 1px solid grey;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.form-submit{
+    font-family: 'IBM Plex Sans', sans-serif;
+    height: 44px;
+    color: #fff;
+    background-color: #1890ff;
+    border: none;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.2rem;
+    transition: 0.3s opacity ease;
+    cursor: pointer;
+}
+.form-submit:hover{
+    opacity: 0.6;
+}
+
+h1 span {
+    font-family: 'Exo', Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}

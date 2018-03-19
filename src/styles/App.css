@@ -46,6 +46,11 @@ div.logo a {
     font-weight: 400;
 }
 
+.log-out {
+    position: fixed;
+    bottom: 15px;
+    right: 20px;
+}
 
 .demo {
     margin: 16px;
@@ -66,4 +71,9 @@ div.logo a {
 
 .ant-form-item-control-wrapper {
     width: 100%;
+}
+
+.ant-layout-header {
+    height: 46px;
+    color: #001529;
 }

@@ -10,7 +10,8 @@ const FormItem = Form.Item
 class BooleanExpression extends Component {
     state = {
         input: '',
-        booleanLaws: []
+        mode: '',
+        booleanLaws: [],
     }
 
     componentWillMount() {
@@ -32,13 +33,9 @@ class BooleanExpression extends Component {
     }
 
     render() {
-        const original = this.props.booleanExpression.originalExpression
-        const simplified = this.props.booleanExpression.simplifiedExpression
-
-        const alreadySimplified = this.props.booleanExpressionData.alreadySimplified
-        const originalData = this.props.booleanExpressionData.originalExpression
-        const simplifiedData = this.props.booleanExpressionData.simplifiedExpression
-        const popularity = this.props.booleanExpressionData.popularity
+        const original = this.props.booleanExpression.expression
+        const simplified = this.props.booleanExpression.simplified
+        const popularity = this.props.booleanExpression.popularity
 
         return (
             <div style={{ padding: 30, background: '#fff' }}>
@@ -72,6 +69,7 @@ class BooleanExpression extends Component {
                                 }}
                                 onPressEnter={() => {
                                     if (this.state.input.length > 0 && this.validateInput()) {
+                                        this.setState({ mode: 'simplify' })
                                         this.props.simplifyExpression(this.state.input)
                                     }
                                 }}
@@ -86,6 +84,7 @@ class BooleanExpression extends Component {
                                 style={{ width: '100%', height: 40 }}
                                 disabled={this.state.input === '' || !this.validateInput()}
                                 onClick={() => {
+                                    this.setState({ mode: 'status' })
                                     this.props.getExpressionData(this.state.input)
                                 }}
                             >
@@ -98,6 +97,7 @@ class BooleanExpression extends Component {
                                 style={{ width: '100%', height: 40 }}
                                 disabled={this.state.input === '' || !this.validateInput()}
                                 onClick={() => {
+                                    this.setState({ mode: 'simplify' })
                                     this.props.simplifyExpression(this.state.input)
                                 }}
                             >
@@ -107,33 +107,32 @@ class BooleanExpression extends Component {
                     </Row>
                 </div>
                 {
-                    simplified !== '' && (
+                    this.state.mode === 'status' && (
+                        <div style={{ marginTop: 40 }}>
+                            <h3>Original Expression</h3>
+                            <p>{original}</p>
+                            <h3>Already Simplified</h3>
+                            <p>{popularity > 0 ? 'true' : 'false'}</p>
+                            {
+                                popularity > 0 ? (
+                                    <div>
+                                        <h3>Simplified Expression</h3>
+                                        <p>{simplified}</p>
+                                        <h3>Popularity</h3>
+                                        <p>{popularity}</p>
+                                    </div>
+                                ) : ''
+                            }
+                        </div>
+                    )
+                }
+                {
+                    this.state.mode === 'simplify' && (
                         <div style={{ marginTop: 40 }}>
                             <h3>Original Expression</h3>
                             <p>{original}</p>
                             <h3>Simplified Expression</h3>
                             <p>{simplified}</p>
-                        </div>
-                    )
-                }
-                {
-                    originalData !== '' && (
-                        <div style={{ marginTop: 40 }}>
-                            <h3>Already Simplified</h3>
-                            <p>{alreadySimplified.toString()}</p>
-                            <h3>Original Expression</h3>
-                            <p>{originalData}</p>
-
-                            {
-                                alreadySimplified === true && (
-                                    <div>
-                                        <h3>Simplified Expression</h3>
-                                        <p>{simplifiedData}</p>
-                                        <h3>Popularity</h3>
-                                        <p>{popularity}</p>
-                                    </div>
-                                )
-                            }
                         </div>
                     )
                 }

@@ -1,16 +1,17 @@
-import { UPDATE_SIMPLIFIED_EXPRESSION, RESET_SIMPLIFIED_EXPRESSION } from './../constants/actionTypes'
+import { UPDATE_BOOLEAN_EXPRESSION, RESET_BOOLEAN_EXPRESSION } from './../constants/actionTypes'
 
 const initialState = {
-    originalExpression: '',
-    simplifiedExpression: '',
-    saveStatus: ''
+    expression: '',
+    isSimplified: false,
+    simplified: '',
+    popularity: 0
 }
 
 export default function booleanExpression(state = initialState, action) {
     switch (action.type) {
-        case UPDATE_SIMPLIFIED_EXPRESSION:
+        case UPDATE_BOOLEAN_EXPRESSION:
             return action.data
-        case RESET_SIMPLIFIED_EXPRESSION:
+        case RESET_BOOLEAN_EXPRESSION:
             return initialState
         default:
             return initialState
