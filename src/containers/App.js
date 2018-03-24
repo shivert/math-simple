@@ -10,7 +10,7 @@ import AuthService from '../utils/authService'
 import withAuth from '../components/withAuth'
 
 import '../styles/App.css'
-import { Layout, Modal } from 'antd'
+import { Layout } from 'antd'
 const { Content, Footer, Sider } = Layout
 
 const Auth = new AuthService()

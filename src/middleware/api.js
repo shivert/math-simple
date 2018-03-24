@@ -1,7 +1,7 @@
 import AuthService from '../utils/authService'
 
 const request = require('superagent')
-const API_BASE = 'http://localhost:3000'
+const API_BASE = 'http://localhost:8080'
 
 const Auth = new AuthService()
 

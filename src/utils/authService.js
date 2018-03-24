@@ -3,7 +3,7 @@ import formurlencoded from 'form-urlencoded'
 
 export default class AuthService {
     constructor(domain) {
-        this.domain = domain || 'http://localhost:3000' // API server domain
+        this.domain = domain || 'http://localhost:8080' // API server domain
         this.fetch = this.fetch.bind(this) // React binding stuff
         this.login = this.login.bind(this)
         this.getProfile = this.getProfile.bind(this)
